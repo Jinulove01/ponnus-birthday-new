@@ -29,7 +29,6 @@
 
   #timer { margin-top: 12px; font-size: 18px; }
 
-  /* popup (love letter) */
   .popup {
     display: none;
     position: fixed;
@@ -38,6 +37,7 @@
     justify-content: center;
     align-items: center;
   }
+
   .popup-box {
     background: white;
     color: black;
@@ -48,15 +48,14 @@
     text-align: left;
   }
 
-  /* cake */
   #cake {
     width: 220px;
     margin: 18px auto;
-    display: block;
+    display: none;
     transition: transform 0.45s ease, opacity 0.6s ease;
     user-select: none;
-    -webkit-user-drag: none;
   }
+
   #cakeMsg {
     display: none;
     margin-top: 12px;
@@ -64,7 +63,6 @@
     color: #fffbe6;
   }
 
-  /* fireworks */
   .firework {
     position: fixed;
     width: 10px;
@@ -72,184 +70,130 @@
     background: yellow;
     border-radius: 50%;
     animation: boom 1s linear;
-    pointer-events: none;
   }
+
   @keyframes boom {
     from { transform: scale(1); opacity: 1; }
     to   { transform: scale(10); opacity: 0; }
   }
 
-  /* quotes */
   #quoteText { margin-top: 6px; font-size: 18px; min-height: 26px; }
 </style>
 </head>
 
 <body>
 
-  <h1>🎂 Happy Birthday My Ponnus 💖</h1>
+<h1>🎂 Happy Birthday My Ponnus 💖</h1>
 
-  <div class="buttons">
-    <button onclick="openPopup()">💌 Love Letter</button>
-    <button onclick="openGallery()">🖼 Photo Gallery</button>
-    <button onclick="toggleCountdown()">⏳ Countdown</button>
-    <button onclick="openSurprise()">🎁 Surprise</button>
-    <button onclick="startFireworks()">🎆 Fireworks</button>
-    <button onclick="showQuote()">💬 Quote</button>
-    <button onclick="openCake()">🎂 Cut Cake</button>
-    <button onclick="toggleMusic()">▶ Music</button>
+<div class="buttons">
+  <button onclick="openPopup()">💌 Love Letter</button>
+  <button onclick="openGallery()">🖼 Photo Gallery</button>
+  <button onclick="toggleCountdown()">⏳ Countdown</button>
+  <button onclick="openSurprise()">🎁 Surprise</button>
+  <button onclick="startFireworks()">🎆 Fireworks</button>
+  <button onclick="showQuote()">💬 Quote</button>
+  <button onclick="openCake()">🎂 Show Cake</button>
+  <button onclick="cutCake()">🔪 Cut Cake</button>
+  <button onclick="toggleMusic()">▶ Music</button>
+</div>
+
+<div id="timer"></div>
+<div id="quoteText"></div>
+
+<img id="cake" src="cake.png" alt="cake image">
+<p id="cakeMsg">🎉 Happy Birthday My Love Ponnus! 💖 — Jinu</p>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h2>My Love Letter 💖</h2>
+    <p>
+      Happy Birthday my jaan Ponnus 💕<br>
+      You are my heart, my happiness, my everything ❤️<br>
+      — Jinu
+    </p>
+    <button onclick="closePopup()">Close</button>
   </div>
+</div>
 
-  <div id="countContainer">
-    <div id="timer"></div>
-  </div>
-
-  <div id="quoteText"></div>
-
-  <!-- cake area -->
-  <img id="cake" src="cake.png" alt="cake image">
-  <p id="cakeMsg">🎉 Happy Birthday My Love Ponnus! May all your dreams come true 💖 — Jinu</p>
-
-  <!-- popup (love letter) -->
-  <div class="popup" id="popup">
-    <div class="popup-box">
-      <h2>My Love Letter 💖</h2>
-      <p>
-        Happy Birthday my jaan Ponnus 💕<br>
-        You are my heart, my happiness, my everything. I promise to love you forever ❤️<br>
-        — Jinu
-      </p>
-      <div style="text-align:right">
-        <button onclick="closePopup()">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- audio -->
-  <audio id="bgMusic">
-    <source src="music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<audio id="bgMusic">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* ---------- Basic UI handlers ---------- */
-function openPopup(){ document.getElementById('popup').style.display = 'flex'; }
-function closePopup(){ document.getElementById('popup').style.display = 'none'; }
+function openPopup(){ document.getElementById('popup').style.display='flex'; }
+function closePopup(){ document.getElementById('popup').style.display='none'; }
 
-/* Photo gallery placeholder (you can expand later) */
 function openGallery(){
-  alert('Photo gallery coming soon — you can upload images named photo1.jpg, photo2.jpg, photo3.jpg to repo.');
+ alert("Upload photos as photo1.jpg, photo2.jpg, photo3.jpg");
 }
 
-/* Surprise placeholder */
 function openSurprise(){
-  alert('Surprise is: I love you, Ponnus 💖');
+ alert("I Love You Ponnus 💖");
 }
 
-/* ---------- Music controls ---------- */
-const musicEl = document.getElementById('bgMusic');
-let musicPlaying = false;
+let musicPlaying=false;
+const music=document.getElementById("bgMusic");
 function toggleMusic(){
-  if(!musicPlaying){
-    musicEl.play().catch(()=>{}); // may be blocked until user interacts
-    musicPlaying = true;
-  } else {
-    musicEl.pause();
-    musicPlaying = false;
-  }
+ if(!musicPlaying){ music.play(); musicPlaying=true;}
+ else{ music.pause(); musicPlaying=false;}
 }
 
-/* ---------- Countdown (toggle to avoid multiple intervals) ---------- */
-let countdownRunning = false;
-let countdownInterval = null;
+let countdownRunning=false;
+let interval=null;
 function toggleCountdown(){
-  if(countdownRunning){
-    clearInterval(countdownInterval);
-    countdownRunning = false;
-    document.getElementById('timer').innerText = '';
-  } else {
-    startCountdown();
-  }
+ if(countdownRunning){ clearInterval(interval); countdownRunning=false; timer.innerHTML="";}
+ else{ startCountdown(); }
 }
+
 function startCountdown(){
-  const target = new Date('December 14, 2025 00:00:00').getTime();
-  countdownRunning = true;
-  updateCountdown(); // immediate update
-  countdownInterval = setInterval(updateCountdown, 1000);
-  function updateCountdown(){
-    const now = Date.now();
-    const diff = target - now;
-    if(diff <= 0){
-      document.getElementById('timer').innerText = '🎉 Happy Birthday!';
-      clearInterval(countdownInterval);
-      countdownRunning = false;
-      return;
-    }
-    const d = Math.floor(diff / (1000*60*60*24));
-    const h = Math.floor((diff / (1000*60*60)) % 24);
-    const m = Math.floor((diff / (1000*60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    document.getElementById('timer').innerText = `⏳ ${d}d ${h}h ${m}m ${s}s`;
-  }
+ const target=new Date("December 14, 2025").getTime();
+ countdownRunning=true;
+ interval=setInterval(()=>{
+  const now=Date.now();
+  const diff=target-now;
+  if(diff<=0){ timer.innerHTML="🎉 Happy Birthday!"; return;}
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff/(1000*60*60))%24);
+  const m=Math.floor((diff/(1000*60))%60);
+  const s=Math.floor((diff/1000)%60);
+  timer.innerHTML=`⏳ ${d}d ${h}h ${m}m ${s}s`;
+ },1000);
 }
 
-/* ---------- Quotes (one click shows next) ---------- */
-const quotes = [
-  "I love you more than words can say 💖",
-  "You are my today and all my tomorrows ❤️",
-  "With you, everything feels perfect 💕"
+const quotes=[
+ "I love you more than words 💖",
+ "You are my forever ❤️",
+ "My heart beats only for you 💕"
 ];
-let quoteIndex = 0;
+let q=0;
 function showQuote(){
-  document.getElementById('quoteText').innerText = quotes[quoteIndex];
-  quoteIndex = (quoteIndex + 1) % quotes.length;
+ quoteText.innerText=quotes[q];
+ q=(q+1)%quotes.length;
 }
 
-/* ---------- Fireworks ---------- */
 function startFireworks(){
-  for(let i=0;i<20;i++){
-    const f = document.createElement('div');
-    f.className = 'firework';
-    f.style.left = (Math.random()*90 + 5) + 'vw';
-    f.style.top = (Math.random()*80 + 5) + 'vh';
-    document.body.appendChild(f);
-    setTimeout(()=> f.remove(), 1100);
-  }
+ for(let i=0;i<20;i++){
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"vw";
+  f.style.top=Math.random()*100+"vh";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+ }
 }
 
-/* ---------- Cake open + cut ---------- */
-function openCake(){ openBox('cake'); } // backward-compat if you used earlier showSection
-function openBox(id){
-  // ensure cake visible; we use #cake element and cakeMsg
-  if(id === 'cake'){
-    document.getElementById('cake').style.display = 'block';
-    document.getElementById('cakeMsg').style.display = 'none';
-  }
+function openCake(){
+ cake.style.display="block";
+ cakeMsg.style.display="none";
+ cake.style.opacity="1";
+ cake.style.transform="scale(1)";
 }
+
 function cutCake(){
-  const cake = document.getElementById('cake');
-  const msg  = document.getElementById('cakeMsg');
-  if(!cake) return;
-  // disable pointer events briefly
-  cake.style.pointerEvents = 'none';
-  // cut animation: tilt + shrink + fade
-  cake.style.transform = 'scale(0.85) rotate(-8deg)';
-  cake.style.opacity = '0.25';
-  setTimeout(()=>{
-    msg.style.display = 'block';
-    cake.style.pointerEvents = '';
-  }, 600);
+ cake.style.transform="scale(0.85) rotate(-8deg)";
+ cake.style.opacity="0.3";
+ setTimeout(()=>{ cakeMsg.style.display="block"; },600);
 }
-
-/* Prevent image dragging (UX) */
-document.getElementById('cake').ondragstart = () => false;
-
-/* ---------- Ensure the page is ready (small initial setup) ---------- */
-document.addEventListener('DOMContentLoaded', ()=> {
-  // hide cake message initially (already hidden by CSS)
-  document.getElementById('cakeMsg').style.display = 'none';
-  // pre-load music (optional)
-  try { musicEl.load(); } catch(e){}
-});
 </script>
 
 </body>
