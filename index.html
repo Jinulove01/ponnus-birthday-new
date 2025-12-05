@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ponnus Birthday 💖</title>
+</head>
+
+<body style="margin:0; background:#ff5f8d; font-family:Arial; text-align:center; color:white;">
+
+  <h1 style="margin-top:60px;">🎂 Happy Birthday My Love Ponnus 💖</h1>
+  <p>From Jinu 🥰 | December 14 🎉</p>
+
+  <br><br>
+
+  <button onclick="openLove()">💌 Open Love Letter</button><br><br>
+  <button onclick="openGift()">🎁 Surprise Gift</button><br><br>
+  <button onclick="playMusic()">🎵 Play Music</button>
+
+  <audio id="song" src="music.mp3"></audio>
+
+  <div id="love" style="display:none; margin-top:30px;">
+    <h3>💖 My Love Letter</h3>
+    <p>
+      My dear Ponnus,<br><br>
+      You are my happiness, my peace, my everything.<br>
+      I love you forever and always.<br><br>
+      – Yours always, Jinu 💕
+    </p>
+    <button onclick="closeAll()">Close</button>
+  </div>
+
+  <div id="gift" style="display:none; margin-top:30px;">
+    <h3>🎁 Your Surprise</h3>
+    <p>
+      Your real gift is waiting in real life 😘<br>
+      This is just the beginning of our beautiful journey 💍
+    </p>
+    <button onclick="closeAll()">Close</button>
+  </div>
+
+  <script>
+    function openLove() {
+      document.getElementById("love").style.display = "block";
+      document.getElementById("gift").style.display = "none";
+    }
+
+    function openGift() {
+      document.getElementById("gift").style.display = "block";
+      document.getElementById("love").style.display = "none";
+    }
+
+    function closeAll() {
+      document.getElementById("love").style.display = "none";
+      document.getElementById("gift").style.display = "none";
+    }
+
+    function playMusic() {
+      document.getElementById("song").play();
+      alert("Music playing for my Ponnus 💖");
+    }
+  </script>
+
+</body>
+</html>
