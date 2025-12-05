@@ -1,62 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ponnus Birthday 💖</title>
+  <title>Ponnus Birthday Surprise 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 { margin-top: 30px; }
+
+    .btn {
+      margin: 10px;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff4b7d;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .box {
+      display: none;
+      background: white;
+      color: #ff4b7d;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 85%;
+      max-width: 400px;
+    }
+
+    /* Gallery */
+    .gallery img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      margin: 5px;
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      color: #ff4b7d;
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 350px;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    /* Fireworks */
+    .firework {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      animation: explode 1s infinite;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(15); opacity: 0; }
+    }
+  </style>
 </head>
+<body>
 
-<body style="margin:0; background:#ff5f8d; font-family:Arial; text-align:center; color:white;">
+  <h1>🎂 Happy Birthday My Love Ponnus 💖</h1>
+  <p>From Jinu 🥰 | December 14</p>
 
-  <h1 style="margin-top:60px;">🎂 Happy Birthday My Love Ponnus 💖</h1>
-  <p>From Jinu 🥰 | December 14 🎉</p>
+  <!-- COUNTDOWN -->
+  <h2 id="countdown"></h2>
 
-  <br><br>
+  <button class="btn" onclick="openLove()">💌 Love Letter</button>
+  <button class="btn" onclick="openGallery()">🖼️ Photo Gallery</button>
+  <button class="btn" onclick="openPopup()">🎁 Surprise</button>
+  <button class="btn" onclick="playMusic()">🎵 Music</button>
 
-  <button onclick="openLove()">💌 Open Love Letter</button><br><br>
-  <button onclick="openGift()">🎁 Surprise Gift</button><br><br>
-  <button onclick="playMusic()">🎵 Play Music</button>
-
-  <audio id="song" src="music.mp3"></audio>
-
-  <div id="love" style="display:none; margin-top:30px;">
-    <h3>💖 My Love Letter</h3>
+  <!-- LOVE LETTER -->
+  <div class="box" id="love">
+    <h3>My Love Letter 💖</h3>
     <p>
       My dear Ponnus,<br><br>
-      You are my happiness, my peace, my everything.<br>
-      I love you forever and always.<br><br>
-      – Yours always, Jinu 💕
+      You are my happiness, my world, my everything.<br>
+      I promise to love you forever and always.<br><br>
+      – Yours only, Jinu 💕
     </p>
-    <button onclick="closeAll()">Close</button>
   </div>
 
-  <div id="gift" style="display:none; margin-top:30px;">
-    <h3>🎁 Your Surprise</h3>
-    <p>
-      Your real gift is waiting in real life 😘<br>
-      This is just the beginning of our beautiful journey 💍
-    </p>
-    <button onclick="closeAll()">Close</button>
+  <!-- GALLERY -->
+  <div class="box gallery" id="gallery">
+    <h3>Our Memories 🥰</h3>
+    <img src="https://via.placeholder.com/80">
+    <img src="https://via.placeholder.com/80">
+    <img src="https://via.placeholder.com/80">
   </div>
+
+  <!-- POPUP -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>🎁 My Surprise 💖</h3>
+      <p>
+        Your real gift is waiting with me in real life 😘<br>
+        This is just the beginning of our forever 💍
+      </p>
+      <button class="btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <audio id="song" src="music.mp3"></audio>
 
   <script>
     function openLove() {
+      hideAll();
       document.getElementById("love").style.display = "block";
-      document.getElementById("gift").style.display = "none";
     }
 
-    function openGift() {
-      document.getElementById("gift").style.display = "block";
-      document.getElementById("love").style.display = "none";
+    function openGallery() {
+      hideAll();
+      document.getElementById("gallery").style.display = "block";
     }
 
-    function closeAll() {
+    function openPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function hideAll() {
       document.getElementById("love").style.display = "none";
-      document.getElementById("gift").style.display = "none";
+      document.getElementById("gallery").style.display = "none";
     }
 
     function playMusic() {
       document.getElementById("song").play();
       alert("Music playing for my Ponnus 💖");
     }
+
+    /* COUNTDOWN */
+    const targetDate = new Date("December 14, 2025 00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML =
+        `⏳ ${d} Days ${h}h ${m}m ${s}s to go`;
+    }, 1000);
+
+    /* FIREWORKS */
+    setInterval(() => {
+      const fw = document.createElement("div");
+      fw.className = "firework";
+      fw.style.left = Math.random() * window.innerWidth + "px";
+      fw.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(fw);
+      setTimeout(() => fw.remove(), 1000);
+    }, 300);
   </script>
 
 </body>
