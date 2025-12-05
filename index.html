@@ -16,7 +16,16 @@ body{
   align-items:center;
   justify-content:center;
   color:white;
-  text-align:center;
+}
+
+/* MAIN CONTAINER */
+#app{
+  width:92%;
+  max-width:420px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
 }
 
 /* HEART BUTTON */
@@ -29,34 +38,21 @@ body{
   font-size:20px;
   cursor:pointer;
   box-shadow:0 0 20px #ff2f6d;
-  z-index:9999;
 }
 
-/* STARS */
-.star{
-  position:fixed;
-  width:4px;
-  height:4px;
-  background:white;
-  border-radius:50%;
-  animation: twinkle 2s infinite;
-}
-
-@keyframes twinkle{
-  0%{opacity:0.4}
-  50%{opacity:1}
-  100%{opacity:0.4}
-}
-
-/* TEXT MESSAGE */
-#message{
+/* TEXT BOX */
+#messageBox{
   display:none;
-  font-size:22px;
+  width:100%;
+  background:rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+  font-size:18px;
   line-height:1.6;
-  max-width:90%;
-  animation: fadeIn 2s forwards;
-  white-space: pre-line;
-  z-index:10;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(255,0,120,0.4);
+  animation: fadeIn 1s forwards;
 }
 
 @keyframes fadeIn{
@@ -64,21 +60,31 @@ body{
   to{opacity:1}
 }
 
-/* ✅ SLIDER */
+/* ✅ BIRTHDAY HIGHLIGHT TEXT */
+.birthday-highlight{
+  margin-top:12px;
+  font-size:22px;
+  font-weight:800;
+  color:gold;
+  text-shadow:0 0 10px gold, 0 0 20px hotpink;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+
+/* ✅ IMAGE SLIDER BOX */
 #slider{
   display:none;
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:92%;
-  max-width:420px;
-  height:70vh;
+  width:100%;
+  height:280px;
   background:black;
-  border-radius:18px;
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-  z-index:999;
+  position:relative;
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
 }
 
 .slide{
@@ -96,109 +102,49 @@ body{
 .slide img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:contain; /* ✅ Full image without cutting */
   background:black;
 }
 
-/* ✅ TEXT ON IMAGE */
-.overlay-text{
-  position:absolute;
-  bottom:20px;
-  width:100%;
-  text-align:center;
-  color:white;
-  font-size:20px;
-  font-weight:600;
-  text-shadow:0 0 10px black, 0 0 20px black;
-  padding:0 10px;
-  z-index:5;
+/* STARS BACKGROUND */
+.star{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation: twinkle 2s infinite;
 }
 
-/* ✅ BIRTHDAY CENTER HIGHLIGHT */
-.birthday-center-box{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:28px;
-  font-weight:900;
-  padding:18px 28px;
-  border-radius:18px;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(10px);
-  text-align:center;
-
-  background-image:linear-gradient(90deg,gold,orange,hotpink);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  text-shadow:0 0 18px rgba(255,200,0,0.9);
-  animation:pulseCenter 1.5s infinite;
-  z-index:10;
-}
-
-@keyframes pulseCenter{
-  0%,100%{transform:translate(-50%,-50%) scale(1)}
-  50%{transform:translate(-50%,-50%) scale(1.1)}
+@keyframes twinkle{
+  0%{opacity:0.4}
+  50%{opacity:1}
+  100%{opacity:0.4}
 }
 </style>
 </head>
 
 <body>
 
-<button id="startBtn" onclick="startSurprise()">❤️ Tap My Heart</button>
+<div id="app">
 
-<div id="message"></div>
+  <button id="startBtn" onclick="startSurprise()">❤️ Tap My Heart</button>
 
-<!-- ✅ SLIDER -->
-<div id="slider">
+  <!-- ✅ TEXT BOX -->
+  <div id="messageBox"></div>
 
-  <div class="slide active">
-    <img src="pic1.jpg">
-    <div class="overlay-text">You are my today 💖</div>
-  </div>
-
-  <div class="slide">
-    <img src="pic2.jpg">
-    <div class="overlay-text">My tomorrow 🌙</div>
-  </div>
-
-  <div class="slide">
-    <img src="pic3.jpg">
-    <div class="overlay-text">And my forever ♾️</div>
-  </div>
-
-  <div class="slide">
-    <img src="pic4.jpg">
-  </div>
-
-  <div class="slide">
-    <img src="pic5.jpg">
-  </div>
-
-  <div class="slide">
-    <img src="pic6.jpg">
-  </div>
-
-  <div class="slide">
-    <img src="pic7.jpg">
-  </div>
-
-  <div class="slide">
-    <img src="pic8.jpg">
-  </div>
-
-  <!-- ✅ BIRTHDAY HIGHLIGHT -->
-  <div class="slide">
-    <img src="pic9.jpg">
-    <div class="birthday-center-box">
-      🎂 Happy Birthday My Love 💖
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="pic10.jpg">
-    <div class="overlay-text">— Yours always, Jinu ❤️</div>
+  <!-- ✅ IMAGE BOX -->
+  <div id="slider">
+    <div class="slide active"><img src="pic1.jpg"></div>
+    <div class="slide"><img src="pic2.jpg"></div>
+    <div class="slide"><img src="pic3.jpg"></div>
+    <div class="slide"><img src="pic4.jpg"></div>
+    <div class="slide"><img src="pic5.jpg"></div>
+    <div class="slide"><img src="pic6.jpg"></div>
+    <div class="slide"><img src="pic7.jpg"></div>
+    <div class="slide"><img src="pic8.jpg"></div>
+    <div class="slide"><img src="pic9.jpg"></div>
+    <div class="slide"><img src="pic10.jpg"></div>
   </div>
 
 </div>
@@ -219,17 +165,16 @@ I just want you to know one thing…
 
 You are my today,
 my tomorrow,
-and my forever ♾️
+and my forever ♾️`;
 
-Happy Birthday My Love ❤️
-— Yours always, Jinu`;
+const birthdayLine = `🎂 Happy Birthday My Love ❤️`;
 
 let index = 0;
-const msgDiv = document.getElementById("message");
+const msgBox = document.getElementById("messageBox");
 const bg = document.getElementById("bgMusic");
 
 /* STARS */
-for(let i=0;i<80;i++){
+for(let i=0;i<70;i++){
   const star = document.createElement("div");
   star.className="star";
   star.style.left = Math.random()*100 + "vw";
@@ -241,7 +186,7 @@ for(let i=0;i<80;i++){
 /* START */
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
-  msgDiv.style.display="block";
+  msgBox.style.display="block";
   bg.play();
   typeWriter();
 }
@@ -249,11 +194,18 @@ function startSurprise(){
 /* TYPE WRITER */
 function typeWriter(){
   if(index < msgText.length){
-    msgDiv.textContent += msgText.charAt(index);
+    msgBox.textContent += msgText.charAt(index);
     index++;
-    setTimeout(typeWriter, 50);
+    setTimeout(typeWriter, 45);
   } else {
-    startSlider(); 
+    // ✅ Add highlighted birthday line after typing
+    const bday = document.createElement("div");
+    bday.className = "birthday-highlight";
+    bday.textContent = birthdayLine;
+    msgBox.appendChild(bday);
+
+    // ✅ Start slider after 1.5 sec
+    setTimeout(startSlider,1500);
   }
 }
 
