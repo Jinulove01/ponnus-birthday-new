@@ -48,21 +48,6 @@
     text-align: left;
   }
 
-  #cake {
-    width: 220px;
-    margin: 18px auto;
-    display: none;
-    transition: transform 0.45s ease, opacity 0.6s ease;
-    user-select: none;
-  }
-
-  #cakeMsg {
-    display: none;
-    margin-top: 12px;
-    font-size: 18px;
-    color: #fffbe6;
-  }
-
   .firework {
     position: fixed;
     width: 10px;
@@ -92,16 +77,11 @@
   <button onclick="openSurprise()">🎁 Surprise</button>
   <button onclick="startFireworks()">🎆 Fireworks</button>
   <button onclick="showQuote()">💬 Quote</button>
-  <button onclick="openCake()">🎂 Show Cake</button>
-  <button onclick="cutCake()">🔪 Cut Cake</button>
   <button onclick="toggleMusic()">▶ Music</button>
 </div>
 
 <div id="timer"></div>
 <div id="quoteText"></div>
-
-<img id="cake" src="cake.png" alt="cake image">
-<p id="cakeMsg">🎉 Happy Birthday My Love Ponnus! 💖 — Jinu</p>
 
 <div class="popup" id="popup">
   <div class="popup-box">
@@ -141,60 +121,7 @@ function toggleMusic(){
 let countdownRunning=false;
 let interval=null;
 function toggleCountdown(){
- if(countdownRunning){ clearInterval(interval); countdownRunning=false; timer.innerHTML="";}
- else{ startCountdown(); }
-}
-
-function startCountdown(){
- const target=new Date("December 14, 2025").getTime();
- countdownRunning=true;
- interval=setInterval(()=>{
-  const now=Date.now();
-  const diff=target-now;
-  if(diff<=0){ timer.innerHTML="🎉 Happy Birthday!"; return;}
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-  timer.innerHTML=`⏳ ${d}d ${h}h ${m}m ${s}s`;
- },1000);
-}
-
-const quotes=[
- "I love you more than words 💖",
- "You are my forever ❤️",
- "My heart beats only for you 💕"
-];
-let q=0;
-function showQuote(){
- quoteText.innerText=quotes[q];
- q=(q+1)%quotes.length;
-}
-
-function startFireworks(){
- for(let i=0;i<20;i++){
-  let f=document.createElement("div");
-  f.className="firework";
-  f.style.left=Math.random()*100+"vw";
-  f.style.top=Math.random()*100+"vh";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1000);
- }
-}
-
-function openCake(){
- cake.style.display="block";
- cakeMsg.style.display="none";
- cake.style.opacity="1";
- cake.style.transform="scale(1)";
-}
-
-function cutCake(){
- cake.style.transform="scale(0.85) rotate(-8deg)";
- cake.style.opacity="0.3";
- setTimeout(()=>{ cakeMsg.style.display="block"; },600);
-}
-</script>
-
-</body>
-</html>
+ if(countdownRunning){
+   clearInterval(interval);
+   countdownRunning=false;
+   timer.innerHTML="";
