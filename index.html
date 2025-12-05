@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Ponnus Birthday Surprise 💖</title>
+  <meta charset="UTF-8">
+
   <style>
     body {
       margin: 0;
@@ -10,14 +11,15 @@
       background: linear-gradient(135deg, #ff758c, #ff7eb3);
       color: white;
       text-align: center;
-      overflow-x: hidden;
     }
 
-    h1 { margin-top: 20px; }
+    h1 {
+      margin-top: 20px;
+    }
 
-    .btn {
+    button {
       padding: 12px 25px;
-      margin: 10px;
+      margin: 8px;
       border: none;
       border-radius: 25px;
       background: white;
@@ -26,140 +28,106 @@
       cursor: pointer;
     }
 
-    .section {
+    .box {
       display: none;
+      background: rgba(255,255,255,0.2);
+      margin: 15px;
       padding: 20px;
+      border-radius: 15px;
     }
 
     /* Popup */
-    .popup {
+    #popup {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      height: 100vh; width: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
     }
 
-    .popup-content {
+    #popupContent {
       background: white;
       color: #ff4b7d;
-      padding: 25px;
+      margin: 150px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 350px;
       border-radius: 15px;
-      width: 85%;
-      max-width: 400px;
-    }
-
-    /* Gallery */
-    .gallery img {
-      width: 90%;
-      max-width: 280px;
-      margin: 10px;
-      border-radius: 15px;
-    }
-
-    /* Quotes */
-    .quote {
-      font-size: 20px;
-      margin-top: 20px;
-      animation: fade 2s infinite;
-    }
-
-    @keyframes fade {
-      0% {opacity: 0;}
-      50% {opacity: 1;}
-      100% {opacity: 0;}
-    }
-
-    /* Fireworks */
-    .firework {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: yellow;
-      border-radius: 50%;
-      animation: boom 1s infinite;
-    }
-
-    @keyframes boom {
-      from {transform: scale(0);}
-      to {transform: scale(3); opacity: 0;}
     }
   </style>
 </head>
+
 <body>
 
 <h1>🎂 Happy Birthday My Ponnus 💖</h1>
 
-<button class="btn" onclick="showSection('letter')">💌 Love Letter</button>
-<button class="btn" onclick="showSection('gallery')">🖼 Photo Gallery</button>
-<button class="btn" onclick="showSection('countdown')">⏳ Countdown</button>
-<button class="btn" onclick="openPopup()">🎁 Surprise</button>
-<button class="btn" onclick="startFireworks()">🎆 Fireworks</button>
-<button class="btn" onclick="showSection('quotes')">💬 Love Quotes</button>
+<button onclick="openBox('letter')">💌 Love Letter</button>
+<button onclick="openBox('gallery')">🖼 Photo Gallery</button>
+<button onclick="openBox('countdown')">⏳ Countdown</button>
+<button onclick="openPopup()">🎁 Surprise</button>
 
-<div id="letter" class="section">
+<div id="letter" class="box">
   <h2>💖 My Love Letter</h2>
   <p>
-    My dear Ponnus, you are my heartbeat, my smile, my everything.
-    Life became beautiful after you came.  
-    Happy Birthday my love ❤️  
-    Forever yours,  
-    <b>– Jinu</b>
+    My dear Ponnus, you are my world, my love, my forever 💕  
+    Happy Birthday my life ❤️  
+    – Jinu
   </p>
 </div>
 
-<div id="gallery" class="section gallery">
-  <h2>🖼 Our Memories</h2>
-  <img src="photo1.jpg">
-  <img src="photo2.jpg">
-  <img src="photo3.jpg">
+<div id="gallery" class="box">
+  <h2>🖼 Our Photos</h2>
+  <p>(Add your photos later here)</p>
 </div>
 
-<div id="countdown" class="section">
-  <h2>⏳ Countdown to Your Birthday</h2>
-  <h3 id="timer"></h3>
+<div id="countdown" class="box">
+  <h2>⏳ Countdown to Dec 14</h2>
+  <h3 id="timer">Loading...</h3>
 </div>
 
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <h2>🎁 Surprise for You</h2>
-    <p>You are the most precious gift in my life Ponnus 💕</p>
-    <button class="btn" onclick="closePopup()">Close</button>
+<div id="popup">
+  <div id="popupContent">
+    <h2>🎁 Surprise</h2>
+    <p>You are the best thing in my life Ponnus 💖</p>
+    <button onclick="closePopup()">Close</button>
   </div>
 </div>
 
-<div id="quotes" class="section">
-  <h2>💬 Romantic Quotes</h2>
-  <div class="quote" id="quoteText"></div>
-</div>
-
-<audio autoplay loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.style.display = "none");
+  function openBox(id) {
+    document.getElementById("letter").style.display = "none";
+    document.getElementById("gallery").style.display = "none";
+    document.getElementById("countdown").style.display = "none";
+
     document.getElementById(id).style.display = "block";
   }
 
   function openPopup() {
-    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup").style.display = "block";
   }
 
   function closePopup() {
     document.getElementById("popup").style.display = "none";
   }
 
-  // Countdown (Dec 14, 2025)
-  const target = new Date("December 14, 2025").getTime();
-  setInterval(() => {
-    const now = new Date().getTime();
-    const diff = target - now;
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    document.getElem
+  // ✅ Countdown (Dec 14, 2025)
+  var targetDate = new Date("December 14, 2025").getTime();
+
+  setInterval(function () {
+    var now = new Date().getTime();
+    var diff = targetDate - now;
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    var minutes = Math.floor((diff / (1000 * 60)) % 60);
+    var seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("timer").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+  }, 1000);
+</script>
+
+</body>
+</html>
