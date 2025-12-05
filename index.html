@@ -98,6 +98,7 @@
 <button onclick="openPopup()">🎁 Surprise</button>
 <button onclick="startFireworks()">🎆 Fireworks</button>
 <button onclick="openBox('quotes')">💬 Quotes</button>
+<button onclick="openCake()">🎂 Cut the Cake</button>
 
 
 <div id="letter" class="box">
@@ -143,15 +144,44 @@
   Your browser does not support the audio element.
 </audio>
 
+<div id="cake" class="box">
+  <h2>🎂 Birthday Cake for Ponnus</h2>
+
+  <img id="cakeImg" src="https://i.imgur.com/3Z6XQ7P.png" style="width:250px;border-radius:20px;">
+
+  <br><br>
+
+  <button onclick="cutCake()">🔪 Cut the Cake</button>
+
+  <p id="cakeMsg" style="display:none;font-size:20px;margin-top:15px;">
+    🎉 Happy Birthday My Love Ponnus! 🎉  
+    May all your dreams come true 💖  
+    – Jinu
+  </p>
+</div>
 
 <script>
   function openBox(id) {
-    document.getElementById("letter").style.display = "none";
-    document.getElementById("gallery").style.display = "none";
-    document.getElementById("countdown").style.display = "none";
-    document.getElementById("quotes").style.display = "none";
-    document.getElementById(id).style.display = "block";
-  }
+  document.getElementById("letter").style.display = "none";
+  document.getElementById("gallery").style.display = "none";
+  document.getElementById("countdown").style.display = "none";
+  document.getElementById("quotes").style.display = "none";
+  document.getElementById("cake").style.display = "none";
+
+  document.getElementById(id).style.display = "block";
+}
+function openCake() {
+  openBox("cake");
+}
+
+function cutCake() {
+  var cake = document.getElementById("cakeImg");
+  cake.style.transform = "scale(0.9) rotate(-5deg)";
+  cake.style.transition = "0.5s";
+
+  document.getElementById("cakeMsg").style.display = "block";
+}
+
 
   function openPopup() {
     document.getElementById("popup").style.display = "block";
