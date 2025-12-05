@@ -1,255 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Ponnus Birthday Surprise 💖</title>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>Happy Birthday Ponnus 💖</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      color: white;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  text-align: center;
+  color: white;
+}
 
-    h1 {
-      margin-top: 20px;
-    }
+h1 {
+  margin-top: 20px;
+}
 
-    button {
-      padding: 12px 22px;
-      margin: 8px;
-      border: none;
-      border-radius: 25px;
-      background: white;
-      color: #ff4b7d;
-      font-size: 15px;
-      cursor: pointer;
-    }
+.buttons button {
+  margin: 10px;
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-    .box {
-      display: none;
-      background: rgba(255,255,255,0.2);
-      margin: 15px;
-      padding: 20px;
-      border-radius: 15px;
-    }
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+}
 
-    /* Popup */
-    #popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-    }
+.popup-box {
+  background: white;
+  color: black;
+  width: 80%;
+  max-width: 400px;
+  margin: 120px auto;
+  padding: 20px;
+  border-radius: 20px;
+}
 
-    #popupContent {
-      background: white;
-      color: #ff4b7d;
-      margin: 120px auto;
-      padding: 20px;
-      width: 80%;
-      max-width: 350px;
-      border-radius: 15px;
-    }
+.firework {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: yellow;
+  border-radius: 50%;
+  animation: boom 1s linear;
+}
 
-    /* Gallery */
-    img {
-      width: 90%;
-      max-width: 280px;
-      border-radius: 15px;
-      margin: 10px 0;
-    }
+@keyframes boom {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(10); opacity: 0; }
+}
 
-    /* Fireworks */
-    .firework {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: yellow;
-      border-radius: 50%;
-      animation: boom 1s infinite;
-    }
-
-    @keyframes boom {
-      from {transform: scale(0);}
-      to {transform: scale(3); opacity: 0;}
-    }
-
-    /* Quotes */
-    .quote {
-      font-size: 20px;
-      margin-top: 15px;
-    }
-  </style>
+#cake {
+  width: 180px;
+  margin-top: 20px;
+  transition: 0.5s;
+}
+</style>
 </head>
 
 <body>
 
 <h1>🎂 Happy Birthday My Ponnus 💖</h1>
 
-<button onclick="openBox('letter')">💌 Love Letter</button>
-<button onclick="openBox('gallery')">🖼 Photo Gallery</button>
-<button onclick="openBox('countdown')">⏳ Countdown</button>
-<button onclick="openPopup()">🎁 Surprise</button>
-<button onclick="startFireworks()">🎆 Fireworks</button>
-<button onclick="openBox('quotes')">💬 Quotes</button>
-<button onclick="openCake()">🎂 Cut the Cake</button>
-
-
-<div id="letter" class="box">
-  <h2>💖 My Love Letter</h2>
-  <p>
-    My dear Ponnus,  
-    You are my happiness, my heartbeat, my everything.  
-    My life became beautiful because of you.  
-    Happy Birthday my love 💕  
-    Forever yours,  
-    <b>– Jinu</b>
-  </p>
-</div>
-
-<div id="gallery" class="box">
-  <h2>🖼 Our Memories</h2>
-  <img src="photo1.jpg">
-  <img src="photo2.jpg">
-  <img src="photo3.jpg">
-  <p>(You can upload your photos later)</p>
-</div>
-
-<div id="countdown" class="box">
-  <h2>⏳ Countdown to Her Birthday</h2>
-  <h3 id="timer">Loading...</h3>
-</div>
-
-<div class="box" id="quotes">
-  <h2>💬 Romantic Quotes</h2>
-  <div class="quote" id="quoteText"></div>
-</div>
-
-<div id="popup">
-  <div id="popupContent">
-    <h2>🎁 Surprise</h2>
-    <p>You are the most precious gift in my life Ponnus 💖</p>
-    <button onclick="closePopup()">Close</button>
-  </div>
-</div>
-
-<audio id="bgMusic" controls>
-  <source src="music.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<div id="cake" class="box">
-  <h2>🎂 Birthday Cake for Ponnus</h2>
-
-<img id="cakeImg" src="cake.png" draggable="false" style="width:250px;border-radius:20px;display:block;margin:auto;transition:0.6s;">
-
-
-
-
-
-
-  <br><br>
-
-  <button onclick="cutCake()">🔪 Cut the Cake</button>
-
-  <p id="cakeMsg" style="display:none;font-size:20px;margin-top:15px;">
-    🎉 Happy Birthday My Love Ponnus! 🎉  
-    May all your dreams come true 💖  
-    – Jinu
-  </p>
-</div>
-
-<script>
-  function openBox(id) {
-  document.getElementById("letter").style.display = "none";
-  document.getElementById("gallery").style.display = "none";
-  document.getElementById("countdown").style.display = "none";
-  document.getElementById("quotes").style.display = "none";
-  document.getElementById("cake").style.display = "none";
-
-  document.getElementById(id).style.display = "block";
-}
-function openCake() {
-  openBox("cake");
-}
-
-<script>
-function cutCake() {
-  var cake = document.getElementById("cakeImg");
-  var msg = document.getElementById("cakeMsg");
-
-  cake.style.transform = "scale(0.8) rotate(-10deg)";
-  cake.style.opacity = "0.2";
-
-  msg.style.display = "block";
-}
-</script>
-
-
-
-
-<script>
-function openPopup() {
-  document.getElementById("popup").style.display = "block";
-}
-
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-}
-
-var targetDate = new Date("December 14, 2025").getTime();
-setInterval(function () {
-  var now = new Date().getTime();
-  var diff = targetDate - now;
-
-  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  var minutes = Math.floor((diff / (1000 * 60)) % 60);
-  var seconds = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("timer").innerHTML =
-    days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-}, 1000);
-
-var quotes = [
-  "I love you more than words can say 💖",
-  "You are my today and all my tomorrows 💕",
-  "With you, everything feels perfect 💞"
-];
-let i = 0;
-setInterval(() => {
-  document.getElementById("quoteText").innerText = quotes[i];
-  i = (i + 1) % quotes.length;
-}, 2000);
-
-function startFireworks() {
-  for (let i = 0; i < 20; i++) {
-    let f = document.createElement("div");
-    f.className = "firework";
-    f.style.left = Math.random() * 100 + "vw";
-    f.style.top = Math.random() * 100 + "vh";
-    document.body.appendChild(f);
-    setTimeout(() => f.remove(), 1200);
-  }
-}
-
-function cutCake() {
-  document.getElementById("cake").style.transform = "scale(0.85) rotate(-5deg)";
-  alert("🎂 Cake Cut Successfully! Happy Birthday Ponnus 💖");
-}
-</script>
-
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-</script>
-
-</body>
-</html>
+<div class="buttons">
+<button oncli
