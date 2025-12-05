@@ -11,7 +11,7 @@ body{
   height:100vh;
   background:black;
   overflow:hidden;
-  font-family: "Segoe UI", sans-serif;
+  font-family:"Segoe UI",sans-serif;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -54,8 +54,8 @@ body{
   font-size:22px;
   line-height:1.6;
   max-width:90%;
-  animation: fadeIn 2s forwards;
-  white-space: pre-line;
+  white-space:pre-line;
+  animation:fadeIn 2s forwards;
 }
 
 @keyframes fadeIn{
@@ -63,37 +63,32 @@ body{
   to{opacity:1}
 }
 
-/* ✅✅✅ FIXED IMAGE SLIDER */
+/* ✅ SLIDER (FIXED FULL IMAGE) */
 #slider{
   display:none;
   position:fixed;
-  bottom:24px;
+  bottom:20px;
   left:50%;
   transform:translateX(-50%);
   width:92%;
   max-width:720px;
-  height:60vh;            /* ✅ BIGGER HEIGHT */
+  height:60vh;
   max-height:420px;
-  overflow:hidden;
-  border-radius:14px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.45);
   background:black;
-  z-index:9998;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
   display:flex;
   align-items:center;
   justify-content:center;
+  z-index:9998;
 }
 
 #slider img{
   position:absolute;
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;     /* ✅✅ ✅ FULL IMAGE NO CUT */
-  left:50%;
-  top:50%;
-  transform:translate(-50%, -50%) scale(1);
+  width:100%;
+  height:100%;
+  object-fit:contain;
   opacity:0;
   transition:opacity 1s ease;
 }
@@ -102,19 +97,18 @@ body{
   opacity:1;
 }
 
-/* FIREWORKS */
+/* FIREWORK */
 .firework{
   position:fixed;
   width:8px;
   height:8px;
   border-radius:50%;
   animation: boom 1.5s forwards;
-  pointer-events:none;
 }
 
 @keyframes boom{
   from{transform:scale(1);opacity:1}
-  to{transform:scale(14);opacity:0}
+  to{transform:scale(12);opacity:0}
 }
 </style>
 </head>
@@ -125,9 +119,9 @@ body{
 
 <div id="message"></div>
 
-<!-- ✅ SLIDER -->
+<!-- ✅✅ SLIDER -->
 <div id="slider">
-  <img src="pic1.jpg">
+  <img src="pic1.jpg" class="active">
   <img src="pic2.jpg">
   <img src="pic3.jpg">
   <img src="pic4.jpg">
@@ -139,6 +133,7 @@ body{
   <img src="pic10.jpg">
 </div>
 
+<!-- ✅ MUSIC -->
 <audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -160,21 +155,21 @@ and my forever ♾️
 Happy Birthday My Love ❤️
 — Yours always, Jinu`;
 
-let index = 0;
+let charIndex = 0;
 const msgDiv = document.getElementById("message");
 const bg = document.getElementById("bgMusic");
 
 /* CREATE STARS */
 for(let i=0;i<80;i++){
-  const star = document.createElement("div");
+  const star=document.createElement("div");
   star.className="star";
-  star.style.left = Math.random()*100 + "vw";
-  star.style.top = Math.random()*100 + "vh";
-  star.style.animationDelay = Math.random()*2 + "s";
+  star.style.left=Math.random()*100+"vw";
+  star.style.top=Math.random()*100+"vh";
+  star.style.animationDelay=Math.random()*2+"s";
   document.body.appendChild(star);
 }
 
-/* MAIN START */
+/* START */
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
@@ -183,12 +178,12 @@ function startSurprise(){
   startFireworks();
 }
 
-/* TYPE WRITER */
+/* TYPE EFFECT */
 function typeWriter(){
-  if(index < msgText.length){
-    msgDiv.textContent += msgText.charAt(index);
-    index++;
-    setTimeout(typeWriter, 50);
+  if(charIndex < msgText.length){
+    msgDiv.textContent += msgText.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeWriter, 45);
   } else {
     startSlider();
   }
@@ -197,8 +192,8 @@ function typeWriter(){
 /* FIREWORKS */
 function startFireworks(){
   setInterval(()=>{
-    for(let i=0;i<10;i++){
-      const f = document.createElement("div");
+    for(let i=0;i<8;i++){
+      const f=document.createElement("div");
       f.className="firework";
       f.style.left=Math.random()*100+"vw";
       f.style.top=Math.random()*100+"vh";
@@ -206,23 +201,23 @@ function startFireworks(){
       document.body.appendChild(f);
       setTimeout(()=>f.remove(),1500);
     }
-  },600);
+  },700);
 }
 
 /* ✅ SLIDER SCRIPT */
-const slider = document.getElementById("slider");
-const slides = slider.querySelectorAll("img");
-let slideIndex = 0;
+const slider=document.getElementById("slider");
+const slides=slider.querySelectorAll("img");
+let slideIndex=0;
 
 function startSlider(){
-  slider.style.display = "flex";
+  slider.style.display="flex";
   slides[0].classList.add("active");
 
   setInterval(()=>{
     slides[slideIndex].classList.remove("active");
-    slideIndex = (slideIndex + 1) % slides.length;
+    slideIndex=(slideIndex+1)%slides.length;
     slides[slideIndex].classList.add("active");
-  }, 3000);
+  },3000);
 }
 </script>
 
