@@ -102,10 +102,10 @@ body{
   object-fit:cover;
 }
 
-/* ✅ TEXT ON IMAGE */
+/* ✅ NORMAL TEXT */
 .overlay-text{
   position:absolute;
-  bottom:20px;
+  bottom:22px;
   width:100%;
   text-align:center;
   color:white;
@@ -113,7 +113,32 @@ body{
   font-weight:600;
   text-shadow:0 0 10px black, 0 0 20px black;
   z-index:5;
-  padding:0 12px;
+  padding:10px 14px;
+}
+
+/* ✅ ✅ ✅ HIGHLIGHTED BIRTHDAY TEXT */
+.birthday-highlight{
+  font-size:26px;
+  font-weight:900;
+  background:linear-gradient(90deg, gold, orange, hotpink);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:pulse 1.5s infinite;
+  text-shadow:0 0 20px rgba(255,215,0,0.8);
+}
+
+/* ✅ Dark glass background behind highlighted wish */
+.birthday-bg{
+  background:rgba(0,0,0,0.50);
+  backdrop-filter:blur(6px);
+  border-radius:14px;
+  padding:14px;
+  margin:0 12px;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
 }
 
 /* 🎆 FIREWORK */
@@ -138,7 +163,7 @@ body{
 
 <div id="message"></div>
 
-<!-- ✅✅ SLIDER WITH TEXT ON IMAGE -->
+<!-- ✅✅ SLIDER -->
 <div id="slider">
 
   <div class="slide active">
@@ -181,9 +206,12 @@ body{
     <div class="overlay-text">My heart belongs to you 💖</div>
   </div>
 
+  <!-- ✅ ✅ ✅ HIGHLIGHTED BIRTHDAY SLIDE -->
   <div class="slide">
     <img src="pic9.jpg">
-    <div class="overlay-text">Happy Birthday My Love 🎂</div>
+    <div class="overlay-text birthday-bg">
+      <div class="birthday-highlight">🎂 Happy Birthday My Love 💖</div>
+    </div>
   </div>
 
   <div class="slide">
@@ -238,7 +266,7 @@ function typeWriter(){
     charIndex++;
     setTimeout(typeWriter, 40);
   } else {
-    setTimeout(startSlider, 1200); // ✅ slider after text ends
+    setTimeout(startSlider, 1200);
   }
 }
 
@@ -257,7 +285,7 @@ function startFireworks(){
   },700);
 }
 
-/* ✅ SLIDER SCRIPT */
+/* ✅ SLIDER */
 const slider=document.getElementById("slider");
 const slides=document.querySelectorAll(".slide");
 let slideIndex=0;
