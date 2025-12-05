@@ -29,6 +29,7 @@ body{
   font-size:20px;
   cursor:pointer;
   box-shadow:0 0 20px #ff2f6d;
+  z-index:9999;
 }
 
 /* STAR BACKGROUND */
@@ -51,15 +52,48 @@ body{
 #message{
   display:none;
   font-size:22px;
-  line-height:1.7;
+  line-height:1.6;
   max-width:90%;
-  white-space: pre-line;
   animation: fadeIn 2s forwards;
+  white-space: pre-line;
 }
 
 @keyframes fadeIn{
   from{opacity:0}
   to{opacity:1}
+}
+
+/* ===== IMAGE SLIDER ===== */
+#slider{
+  display:none;
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:720px;
+  height:220px;
+  overflow:hidden;
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.45);
+  background:#000;
+  z-index:9998;
+}
+
+#slider img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  left:0;
+  top:0;
+  opacity:0;
+  transition:opacity 1s ease, transform 1s ease;
+  transform:scale(1.03);
+}
+#slider img.active{
+  opacity:1;
+  transform:scale(1);
 }
 
 /* FIREWORKS */
@@ -85,13 +119,26 @@ body{
 
 <div id="message"></div>
 
+<!-- IMAGE SLIDER -->
+<div id="slider">
+  <img src="pic1.jpg">
+  <img src="pic2.jpg">
+  <img src="pic3.jpg">
+  <img src="pic4.jpg">
+  <img src="pic5.jpg">
+  <img src="pic6.jpg">
+  <img src="pic7.jpg">
+  <img src="pic8.jpg">
+  <img src="pic9.jpg">
+  <img src="pic10.jpg">
+</div>
+
 <audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const msgText = `Ponnus… 💖
-
 From the first moment I saw you,
 my world slowly changed.
 Your smile became my happiness,
@@ -121,33 +168,30 @@ for(let i=0;i<80;i++){
   document.body.appendChild(star);
 }
 
-/* MAIN SURPRISE */
+/* MAIN START */
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
-
-  bg.currentTime = 0;
-  bg.play().catch(()=>{}); // ✅ mobile safe
-
+  bg.play();
   typeWriter();
   startFireworks();
 }
 
-/* TYPE WRITER (SAFE VERSION) */
+/* TYPE WRITER */
 function typeWriter(){
   if(index < msgText.length){
-    msgDiv.textContent += msgText.charAt(index); // ✅ FIXED
+    msgDiv.textContent += msgText.charAt(index);
     index++;
     setTimeout(typeWriter, 50);
+  } else {
+    startSlider(); // ✅ start slider after typing
   }
 }
 
-/* CONTROLLED FIREWORKS */
+/* FIREWORKS */
 function startFireworks(){
-  let count = 0;
-
-  const fireInt = setInterval(()=>{
-    for(let i=0;i<8;i++){
+  setInterval(()=>{
+    for(let i=0;i<10;i++){
       const f = document.createElement("div");
       f.className="firework";
       f.style.left=Math.random()*100+"vw";
@@ -156,10 +200,23 @@ function startFireworks(){
       document.body.appendChild(f);
       setTimeout(()=>f.remove(),1500);
     }
-
-    count++;
-    if(count > 20){ clearInterval(fireInt); } // ✅ stops cleanly
   },600);
+}
+
+/* ==== SLIDER SCRIPT ==== */
+const slider = document.getElementById("slider");
+const slides = slider.querySelectorAll("img");
+let slideIndex = 0;
+
+function startSlider(){
+  slider.style.display = "block";
+  slides[0].classList.add("active");
+
+  setInterval(()=>{
+    slides[slideIndex].classList.remove("active");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+  }, 3000);
 }
 </script>
 
