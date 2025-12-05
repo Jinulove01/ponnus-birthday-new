@@ -31,7 +31,20 @@
   .quoteBox{height:34px;margin-top:6px;font-style:italic;color:#6b2f3b;font-weight:600}
 
   /* fireworks pieces */
-  .fw{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none}
+.firework{
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: boom 1.5s ease-out;
+}
+
+@keyframes boom{
+  from{transform:scale(1);opacity:1}
+  to{transform:scale(15);opacity:0}
+}
+
 
   /* footer small */
   .small{font-size:13px;color:#6b6b6b;margin-top:12px}
@@ -156,26 +169,21 @@ function toggleCountdown(){
 let fireworkInterval = null;
 
 function startFireworks(){
-  if(fireworkInterval) return; // prevent multiple starts
+  if(fireworkInterval) return;
 
   fireworkInterval = setInterval(()=>{
-    for(let i=0;i<6;i++){
+    for(let i=0;i<8;i++){
       const f = document.createElement("div");
       f.className = "firework";
       f.style.left = Math.random()*100 + "vw";
       f.style.top = Math.random()*100 + "vh";
       f.style.background = `hsl(${Math.random()*360},100%,60%)`;
       document.body.appendChild(f);
-
-      setTimeout(()=>{
-        f.style.transform = "scale(15)";
-        f.style.opacity = "0";
-      }, 50);
-
       setTimeout(()=> f.remove(), 1500);
     }
-  }, 400); // keeps repeating every 0.4 sec
+  }, 350);
 }
+
 
 
 /* ---------- small safety / UX ---------- */
