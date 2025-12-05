@@ -194,57 +194,61 @@ function cutCake() {
 
 
 
-  function openPopup() {
-    document.getElementById("popup").style.display = "block";
+<script>
+function openPopup() {
+  document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+var targetDate = new Date("December 14, 2025").getTime();
+setInterval(function () {
+  var now = new Date().getTime();
+  var diff = targetDate - now;
+
+  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  var minutes = Math.floor((diff / (1000 * 60)) % 60);
+  var seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("timer").innerHTML =
+    days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+}, 1000);
+
+var quotes = [
+  "I love you more than words can say 💖",
+  "You are my today and all my tomorrows 💕",
+  "With you, everything feels perfect 💞"
+];
+let i = 0;
+setInterval(() => {
+  document.getElementById("quoteText").innerText = quotes[i];
+  i = (i + 1) % quotes.length;
+}, 2000);
+
+function startFireworks() {
+  for (let i = 0; i < 20; i++) {
+    let f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1200);
   }
+}
 
-  function closePopup() {
-    document.getElementById("popup").style.display = "none";
-  }
+function cutCake() {
+  document.getElementById("cake").style.transform = "scale(0.85) rotate(-5deg)";
+  alert("🎂 Cake Cut Successfully! Happy Birthday Ponnus 💖");
+}
+</script>
 
-  
-  
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  // ✅ Countdown (Dec 14, 2025)
-  var targetDate = new Date("December 14, 2025").getTime();
-  setInterval(function () {
-    var now = new Date().getTime();
-    var diff = targetDate - now;
-
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    var minutes = Math.floor((diff / (1000 * 60)) % 60);
-    var seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("timer").innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-  }, 1000);
-
-  // Quotes
-  var quotes = [
-    "I love you more than words can say 💖",
-    "You are my today and all my tomorrows ❤️",
-    "With you, everything feels perfect 💕"
-  ];
-  var i = 0;
-  setInterval(function () {
-    document.getElementById("quoteText").innerText = quotes[i];
-    i = (i + 1) % quotes.length;
-  }, 2000);
-
-  // Fireworks
-  function startFireworks() {
-    for (var i = 0; i < 15; i++) {
-      var f = document.createElement("div");
-      f.className = "firework";
-      f.style.left = Math.random() * 100 + "vw";
-      f.style.top = Math.random() * 100 + "vh";
-      document.body.appendChild(f);
-      setTimeout(function () {
-        f.remove();
-      }, 1000);
-    }
-  }
 </script>
 
 </body>
