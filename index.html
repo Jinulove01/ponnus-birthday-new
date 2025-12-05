@@ -19,7 +19,7 @@ body{
   text-align:center;
 }
 
-/* HEART BUTTON */
+/* ❤️ HEART BUTTON */
 #startBtn{
   background:#ff2f6d;
   border:none;
@@ -29,10 +29,10 @@ body{
   font-size:20px;
   cursor:pointer;
   box-shadow:0 0 20px #ff2f6d;
-  z-index:9999;
+  z-index:10001;
 }
 
-/* STAR BACKGROUND */
+/* ⭐ STAR BACKGROUND */
 .star{
   position:fixed;
   width:4px;
@@ -48,7 +48,7 @@ body{
   100%{opacity:0.4}
 }
 
-/* TYPED TEXT */
+/* 💬 TEXT MESSAGE (ALWAYS ABOVE IMAGES) */
 #message{
   display:none;
   font-size:22px;
@@ -56,6 +56,9 @@ body{
   max-width:90%;
   white-space:pre-line;
   animation:fadeIn 2s forwards;
+  position:relative;
+  z-index:10000;
+  text-shadow:0 0 12px black, 0 0 22px black;
 }
 
 @keyframes fadeIn{
@@ -63,7 +66,7 @@ body{
   to{opacity:1}
 }
 
-/* ✅ SLIDER (FIXED FULL IMAGE) */
+/* ✅ IMAGE SLIDER (BEHIND TEXT) */
 #slider{
   display:none;
   position:fixed;
@@ -81,7 +84,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:9998;
+  z-index:999;   /* ✅ BELOW TEXT */
 }
 
 #slider img{
@@ -97,7 +100,7 @@ body{
   opacity:1;
 }
 
-/* FIREWORK */
+/* 🎆 FIREWORK */
 .firework{
   position:fixed;
   width:8px;
@@ -159,7 +162,7 @@ let charIndex = 0;
 const msgDiv = document.getElementById("message");
 const bg = document.getElementById("bgMusic");
 
-/* CREATE STARS */
+/* ⭐ CREATE STARS */
 for(let i=0;i<80;i++){
   const star=document.createElement("div");
   star.className="star";
@@ -169,7 +172,7 @@ for(let i=0;i<80;i++){
   document.body.appendChild(star);
 }
 
-/* START */
+/* ❤️ START */
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
@@ -178,7 +181,7 @@ function startSurprise(){
   startFireworks();
 }
 
-/* TYPE EFFECT */
+/* ⌨️ TYPE EFFECT */
 function typeWriter(){
   if(charIndex < msgText.length){
     msgDiv.textContent += msgText.charAt(charIndex);
@@ -189,7 +192,7 @@ function typeWriter(){
   }
 }
 
-/* FIREWORKS */
+/* 🎆 FIREWORKS */
 function startFireworks(){
   setInterval(()=>{
     for(let i=0;i<8;i++){
