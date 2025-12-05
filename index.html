@@ -1,290 +1,155 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Happy Birthday Ponnus — From Jinu 💖</title>
+<meta charset="UTF-8">
+<title>For My Ponnus 💖 — From Jinu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --pink:#ff5c8d;
-  --bg1:#ffdce6;
-  --bg2:#fff7fb;
-}
-
 body{
   margin:0;
-  font-family:Poppins,system-ui;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  min-height:100vh;
-}
-
-.wrap{
-  min-height:100vh;
+  height:100vh;
+  background:black;
+  overflow:hidden;
+  font-family: "Segoe UI", sans-serif;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:20px;
-}
-
-.card{
-  width:100%;
-  max-width:800px;
-  background:white;
-  border-radius:18px;
-  box-shadow:0 20px 45px rgba(0,0,0,.12);
-  padding:24px;
+  color:white;
   text-align:center;
 }
 
-h1{
-  font-family:"Dancing Script",cursive;
-  color:var(--pink);
-  font-size:42px;
-  margin:0;
-}
-
-.lead{
-  margin-top:6px;
-  color:#555;
-}
-
-.controls{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
-  margin:18px 0;
-}
-
-.btn{
-  background:var(--pink);
+/* HEART BUTTON */
+#startBtn{
+  background:#ff2f6d;
+  border:none;
   color:white;
-  border:none;
-  padding:10px 16px;
-  border-radius:12px;
-  font-weight:600;
+  padding:18px 28px;
+  border-radius:50px;
+  font-size:20px;
   cursor:pointer;
+  box-shadow:0 0 20px #ff2f6d;
 }
 
-.ghost{
-  background:white;
-  color:var(--pink);
-  border:2px solid var(--pink);
-}
-
-#timer{
-  font-weight:700;
-  margin-top:10px;
-  font-size:18px;
-}
-
-.quoteBox{
-  margin-top:10px;
-  font-style:italic;
-  min-height:28px;
-  font-weight:600;
-  color:#6b2f3b;
-}
-
-/* MODALS */
-.modal{
+/* STAR BACKGROUND */
+.star{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  visibility:hidden;
-  opacity:0;
-  transition:.3s;
-}
-
-.modal.show{
-  visibility:visible;
-  opacity:1;
-}
-
-.modal-card{
+  width:4px;
+  height:4px;
   background:white;
-  padding:20px;
-  border-radius:14px;
-  width:90%;
-  max-width:500px;
+  border-radius:50%;
+  animation: twinkle 2s infinite;
 }
 
-.modal-card h2{
-  font-family:"Dancing Script";
-  color:var(--pink);
+@keyframes twinkle{
+  0%{opacity:0.4}
+  50%{opacity:1}
+  100%{opacity:0.4}
 }
 
-.close{
-  padding:8px 14px;
-  border:none;
-  background:#eee;
-  border-radius:10px;
-  cursor:pointer;
+/* TYPED TEXT */
+#message{
+  display:none;
+  font-size:22px;
+  line-height:1.6;
+  max-width:90%;
+  animation: fadeIn 2s forwards;
 }
 
-/* ✅✅✅ FIREWORK STYLE (FIXED) ✅✅✅ */
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* FIREWORKS */
 .firework{
   position:fixed;
   width:8px;
   height:8px;
   border-radius:50%;
+  animation: boom 1.5s forwards;
   pointer-events:none;
-  animation:boom 1.4s ease-out forwards;
 }
 
 @keyframes boom{
-  from{ transform:scale(1); opacity:1; }
-  to{ transform:scale(14); opacity:0; }
-}
-
-.small{
-  margin-top:14px;
-  font-size:13px;
-  color:#777;
+  from{transform:scale(1);opacity:1}
+  to{transform:scale(14);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
-  <div class="card">
-    <h1>Happy Birthday Ponnus 💖</h1>
-    <p class="lead">A romantic surprise from <strong>Jinu</strong></p>
+<button id="startBtn" onclick="startSurprise()">❤️ Tap My Heart</button>
 
-    <div id="timer">⏳ Click countdown to start</div>
+<div id="message"></div>
 
-    <div class="controls">
-      <button class="btn" onclick="openLove()">💌 Love Letter</button>
-      <button class="btn" onclick="toggleCountdown()">⏳ Countdown</button>
-      <button class="btn" onclick="openSurprise()">🎁 Surprise</button>
-      <button class="ghost" onclick="startFireworks()">🎆 Fireworks</button>
-      <button class="btn" id="musicBtn" onclick="toggleMusic()">▶ Music</button>
-      <button class="ghost" onclick="nextQuote()">💬 Quote</button>
-    </div>
-
-    <div class="quoteBox" id="quoteBox">Click Quote to see love lines 💕</div>
-
-    <div class="small">
-      Open this on <b>December 14</b> at midnight ❤️
-    </div>
-  </div>
-</div>
-
-<!-- LOVE LETTER -->
-<div class="modal" id="loveModal">
-  <div class="modal-card">
-    <h2>My Dearest Ponnus 💖</h2>
-    <p>
-      You changed my world with your smile.  
-      Every heartbeat of mine whispers your name.  
-      On your birthday, I promise my love forever.  
-      <br><br>
-      — Jinu ❤️
-    </p>
-    <button class="close" onclick="closeLove()">Close</button>
-  </div>
-</div>
-
-<!-- SURPRISE -->
-<div class="modal" id="surpriseModal">
-  <div class="modal-card">
-    <h2>Surprise 🎁</h2>
-    <p>
-      Your real surprise is waiting in my arms tonight 💕  
-      Happy Birthday my love!
-    </p>
-    <button class="close" onclick="closeSurprise()">Close</button>
-  </div>
-</div>
-
-<!-- MUSIC -->
-<audio id="bg" preload="auto">
+<audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* ✅ QUOTES */
-const quotes=[
- "I love you more than words 💖",
- "You are my forever ❤️",
- "My heart beats only for you 💕",
- "Every moment with you is magic ✨"
-];
-let q=0;
-function nextQuote(){
- document.getElementById("quoteBox").innerText=quotes[q];
- q=(q+1)%quotes.length;
+const msgText = `Ponnus… 💖<br><br>
+From the first moment I saw you,  
+my world slowly changed.  
+Your smile became my happiness,  
+your voice became my peace.  
+
+On this special day,  
+I just want you to know one thing…  
+
+You are my today,  
+my tomorrow,  
+and my forever ♾️  
+
+Happy Birthday My Love ❤️  
+— Yours always, Jinu`;
+
+let index = 0;
+const msgDiv = document.getElementById("message");
+const bg = document.getElementById("bgMusic");
+
+/* CREATE STARS */
+for(let i=0;i<80;i++){
+  const star = document.createElement("div");
+  star.className="star";
+  star.style.left = Math.random()*100 + "vw";
+  star.style.top = Math.random()*100 + "vh";
+  star.style.animationDelay = Math.random()*2 + "s";
+  document.body.appendChild(star);
 }
 
-/* ✅ LOVE LETTER */
-function openLove(){ loveModal.classList.add("show"); }
-function closeLove(){ loveModal.classList.remove("show"); }
-
-/* ✅ SURPRISE */
-function openSurprise(){ surpriseModal.classList.add("show"); }
-function closeSurprise(){ surpriseModal.classList.remove("show"); }
-
-/* ✅ MUSIC */
-const bg=document.getElementById("bg");
-let playing=false;
-function toggleMusic(){
- if(!playing){
+/* MAIN SURPRISE */
+function startSurprise(){
+  document.getElementById("startBtn").style.display="none";
+  msgDiv.style.display="block";
   bg.play();
-  playing=true;
-  musicBtn.innerText="⏸ Pause";
- }else{
-  bg.pause();
-  playing=false;
-  musicBtn.innerText="▶ Music";
- }
+  typeWriter();
+  startFireworks();
 }
 
-/* ✅ COUNTDOWN */
-let running=false, timerLoop=null;
-function toggleCountdown(){
- if(running){ clearInterval(timerLoop); running=false; timer.innerText="⏳ Click countdown to start"; return;}
- const now=new Date();
- let year=now.getFullYear();
- let target=new Date(`December 14, ${year} 00:00:00`).getTime();
- if(target<now.getTime()) target=new Date(`December 14, ${year+1} 00:00:00`).getTime();
- running=true;
- timerLoop=setInterval(()=>{
-  const diff=target-Date.now();
-  if(diff<=0){
-   clearInterval(timerLoop);
-   timer.innerText="🎉 Happy Birthday Ponnus!";
-   return;
+/* TYPE WRITER */
+function typeWriter(){
+  if(index < msgText.length){
+    msgDiv.innerHTML += msgText.charAt(index);
+    index++;
+    setTimeout(typeWriter, 50);
   }
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff/(1000*60*60))%24);
-  const m=Math.floor((diff/(1000*60))%60);
-  const s=Math.floor((diff/1000)%60);
-  timer.innerText=`⏳ ${d}d ${h}h ${m}m ${s}s`;
- },1000);
 }
 
-/* ✅✅✅ REAL FIREWORK SYSTEM (FIXED) ✅✅✅ */
-let fwInterval=null;
+/* REAL FIREWORKS */
 function startFireworks(){
- if(fwInterval) return;
- fwInterval=setInterval(()=>{
-  for(let i=0;i<10;i++){
-   const f=document.createElement("div");
-   f.className="firework";
-   f.style.left=Math.random()*100+"vw";
-   f.style.top=Math.random()*100+"vh";
-   f.style.background=`hsl(${Math.random()*360},100%,60%)`;
-   document.body.appendChild(f);
-   setTimeout(()=>f.remove(),1400);
-  }
- },350);
+  setInterval(()=>{
+    for(let i=0;i<10;i++){
+      const f = document.createElement("div");
+      f.className="firework";
+      f.style.left=Math.random()*100+"vw";
+      f.style.top=Math.random()*100+"vh";
+      f.style.background=`hsl(${Math.random()*360},100%,60%)`;
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(),1500);
+    }
+  },600);
 }
 </script>
 
