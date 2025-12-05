@@ -154,29 +154,23 @@ function toggleCountdown(){
 
 /* ---------- Fireworks (little bursts) ---------- */
 function startFireworks(){
-  for(let i=0;i<22;i++){
-    const el = document.createElement('div');
-    el.className = 'fw';
-    el.style.left = (Math.random()*85 + 7) + 'vw';
-    el.style.top = (Math.random()*75 + 10) + 'vh';
-    el.style.background = ['#ffd166','#ff8fab','#fff1a8','#ffd1e6','#ffb3c7'][Math.floor(Math.random()*5)];
-    document.body.appendChild(el);
-    // random velocity animation
-    const dx = (Math.random()-0.5)*10;
-    const dy = -6 - Math.random()*6;
-    let life = 0;
-    const id = setInterval(()=>{
-      life++;
-      const curL = parseFloat(el.style.left);
-      const curT = parseFloat(el.style.top);
-      el.style.left = (curL + dx) + 'vw';
-      el.style.top = (curT + dy + life*0.12) + 'vh';
-      el.style.opacity = Math.max(0, 1 - life/40);
-      el.style.transform = `rotate(${life*18}deg)`;
-      if(life>40){ clearInterval(id); el.remove(); }
-    },16);
+  for(let i=0;i<30;i++){
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.style.left = Math.random()*100 + "vw";
+    f.style.top = Math.random()*100 + "vh";
+    f.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(f);
+
+    setTimeout(()=> {
+      f.style.transform = "scale(12)";
+      f.style.opacity = "0";
+    }, 50);
+
+    setTimeout(()=> f.remove(), 1300);
   }
 }
+
 
 /* ---------- small safety / UX ---------- */
 document.addEventListener('DOMContentLoaded', ()=> {
