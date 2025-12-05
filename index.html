@@ -152,6 +152,7 @@
 
 
 
+
   <br><br>
 
   <button onclick="cutCake()">🔪 Cut the Cake</button>
@@ -179,11 +180,13 @@ function openCake() {
 
 function cutCake() {
   var cake = document.getElementById("cakeImg");
+  cake.style.display = "block";
   cake.style.transform = "scale(0.9) rotate(-5deg)";
   cake.style.transition = "0.5s";
 
   document.getElementById("cakeMsg").style.display = "block";
 }
+
 
 
   function openPopup() {
