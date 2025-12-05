@@ -11,7 +11,7 @@ body{
   height:100vh;
   background:black;
   overflow:hidden;
-  font-family:"Segoe UI",sans-serif;
+  font-family: "Segoe UI", sans-serif;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -19,7 +19,7 @@ body{
   text-align:center;
 }
 
-/* ❤️ START BUTTON */
+/* HEART BUTTON */
 #startBtn{
   background:#ff2f6d;
   border:none;
@@ -29,10 +29,10 @@ body{
   font-size:20px;
   cursor:pointer;
   box-shadow:0 0 20px #ff2f6d;
-  z-index:10001;
+  z-index:9999;
 }
 
-/* ⭐ STARS */
+/* STARS */
 .star{
   position:fixed;
   width:4px;
@@ -48,17 +48,15 @@ body{
   100%{opacity:0.4}
 }
 
-/* 💬 TYPE TEXT */
+/* TEXT MESSAGE */
 #message{
   display:none;
   font-size:22px;
   line-height:1.6;
   max-width:90%;
-  white-space:pre-line;
-  animation:fadeIn 2s forwards;
-  position:relative;
-  z-index:10000;
-  text-shadow:0 0 12px black, 0 0 22px black;
+  animation: fadeIn 2s forwards;
+  white-space: pre-line;
+  z-index:10;
 }
 
 @keyframes fadeIn{
@@ -77,13 +75,12 @@ body{
   max-width:420px;
   height:70vh;
   background:black;
-  border-radius:16px;
+  border-radius:18px;
   overflow:hidden;
   box-shadow:0 20px 40px rgba(0,0,0,0.6);
   z-index:999;
 }
 
-/* ✅ SLIDE */
 .slide{
   position:absolute;
   width:100%;
@@ -99,60 +96,50 @@ body{
 .slide img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  background:black;
 }
 
-/* ✅ NORMAL TEXT */
+/* ✅ TEXT ON IMAGE */
 .overlay-text{
   position:absolute;
-  bottom:22px;
+  bottom:20px;
   width:100%;
   text-align:center;
   color:white;
   font-size:20px;
   font-weight:600;
   text-shadow:0 0 10px black, 0 0 20px black;
+  padding:0 10px;
   z-index:5;
-  padding:10px 14px;
 }
 
-/* ✅ ✅ ✅ HIGHLIGHTED BIRTHDAY TEXT */
-.birthday-highlight{
-  font-size:26px;
+/* ✅ BIRTHDAY CENTER HIGHLIGHT */
+.birthday-center-box{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:28px;
   font-weight:900;
-  background:linear-gradient(90deg, gold, orange, hotpink);
+  padding:18px 28px;
+  border-radius:18px;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(10px);
+  text-align:center;
+
+  background-image:linear-gradient(90deg,gold,orange,hotpink);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:pulse 1.5s infinite;
-  text-shadow:0 0 20px rgba(255,215,0,0.8);
+
+  text-shadow:0 0 18px rgba(255,200,0,0.9);
+  animation:pulseCenter 1.5s infinite;
+  z-index:10;
 }
 
-/* ✅ Dark glass background behind highlighted wish */
-.birthday-bg{
-  background:rgba(0,0,0,0.50);
-  backdrop-filter:blur(6px);
-  border-radius:14px;
-  padding:14px;
-  margin:0 12px;
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-
-/* 🎆 FIREWORK */
-.firework{
-  position:fixed;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  animation: boom 1.5s forwards;
-}
-
-@keyframes boom{
-  from{transform:scale(1);opacity:1}
-  to{transform:scale(12);opacity:0}
+@keyframes pulseCenter{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.1)}
 }
 </style>
 </head>
@@ -163,17 +150,17 @@ body{
 
 <div id="message"></div>
 
-<!-- ✅✅ SLIDER -->
+<!-- ✅ SLIDER -->
 <div id="slider">
 
   <div class="slide active">
     <img src="pic1.jpg">
-    <div class="overlay-text">You are my today ❤️</div>
+    <div class="overlay-text">You are my today 💖</div>
   </div>
 
   <div class="slide">
     <img src="pic2.jpg">
-    <div class="overlay-text">My tomorrow 🌅</div>
+    <div class="overlay-text">My tomorrow 🌙</div>
   </div>
 
   <div class="slide">
@@ -183,45 +170,39 @@ body{
 
   <div class="slide">
     <img src="pic4.jpg">
-    <div class="overlay-text">With you, life is beautiful 💕</div>
   </div>
 
   <div class="slide">
     <img src="pic5.jpg">
-    <div class="overlay-text">Your smile is my happiness 😊</div>
   </div>
 
   <div class="slide">
     <img src="pic6.jpg">
-    <div class="overlay-text">Your voice is my peace 🎶</div>
   </div>
 
   <div class="slide">
     <img src="pic7.jpg">
-    <div class="overlay-text">I’m thankful for you everyday 🙏</div>
   </div>
 
   <div class="slide">
     <img src="pic8.jpg">
-    <div class="overlay-text">My heart belongs to you 💖</div>
   </div>
 
-  <!-- ✅ ✅ ✅ HIGHLIGHTED BIRTHDAY SLIDE -->
+  <!-- ✅ BIRTHDAY HIGHLIGHT -->
   <div class="slide">
     <img src="pic9.jpg">
-    <div class="overlay-text birthday-bg">
-      <div class="birthday-highlight">🎂 Happy Birthday My Love 💖</div>
+    <div class="birthday-center-box">
+      🎂 Happy Birthday My Love 💖
     </div>
   </div>
 
   <div class="slide">
     <img src="pic10.jpg">
-    <div class="overlay-text">— Yours always, Jinu 💝</div>
+    <div class="overlay-text">— Yours always, Jinu ❤️</div>
   </div>
 
 </div>
 
-<!-- ✅ MUSIC -->
 <audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -234,68 +215,60 @@ Your smile became my happiness,
 your voice became my peace.
 
 On this special day,
-I just want you to know one thing…`;
+I just want you to know one thing…
 
-let charIndex = 0;
+You are my today,
+my tomorrow,
+and my forever ♾️
+
+Happy Birthday My Love ❤️
+— Yours always, Jinu`;
+
+let index = 0;
 const msgDiv = document.getElementById("message");
 const bg = document.getElementById("bgMusic");
 
-/* ⭐ STARS */
+/* STARS */
 for(let i=0;i<80;i++){
-  const star=document.createElement("div");
+  const star = document.createElement("div");
   star.className="star";
-  star.style.left=Math.random()*100+"vw";
-  star.style.top=Math.random()*100+"vh";
-  star.style.animationDelay=Math.random()*2+"s";
+  star.style.left = Math.random()*100 + "vw";
+  star.style.top = Math.random()*100 + "vh";
+  star.style.animationDelay = Math.random()*2 + "s";
   document.body.appendChild(star);
 }
 
-/* ❤️ START */
+/* START */
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
   bg.play();
   typeWriter();
-  startFireworks();
 }
 
-/* ⌨️ TYPE EFFECT */
+/* TYPE WRITER */
 function typeWriter(){
-  if(charIndex < msgText.length){
-    msgDiv.textContent += msgText.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeWriter, 40);
+  if(index < msgText.length){
+    msgDiv.textContent += msgText.charAt(index);
+    index++;
+    setTimeout(typeWriter, 50);
   } else {
-    setTimeout(startSlider, 1200);
+    startSlider(); 
   }
 }
 
-/* 🎆 FIREWORKS */
-function startFireworks(){
-  setInterval(()=>{
-    for(let i=0;i<8;i++){
-      const f=document.createElement("div");
-      f.className="firework";
-      f.style.left=Math.random()*100+"vw";
-      f.style.top=Math.random()*100+"vh";
-      f.style.background=`hsl(${Math.random()*360},100%,60%)`;
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(),1500);
-    }
-  },700);
-}
-
-/* ✅ SLIDER */
-const slider=document.getElementById("slider");
-const slides=document.querySelectorAll(".slide");
-let slideIndex=0;
+/* ✅ SLIDER SCRIPT */
+const slider = document.getElementById("slider");
+const slides = document.querySelectorAll(".slide");
+let slideIndex = 0;
 
 function startSlider(){
-  slider.style.display="block";
+  slider.style.display = "block";
+  slides[0].classList.add("active");
 
   setInterval(()=>{
     slides[slideIndex].classList.remove("active");
-    slideIndex=(slideIndex+1)%slides.length;
+    slideIndex = (slideIndex + 1) % slides.length;
     slides[slideIndex].classList.add("active");
   },3000);
 }
