@@ -147,7 +147,8 @@
 <div id="cake" class="box">
   <h2>🎂 Birthday Cake for Ponnus</h2>
 
-<img id="cakeImg" src="cake.png" style="width:250px;border-radius:20px;">
+<img id="cakeImg" src="cake.png" draggable="false" style="width:250px;border-radius:20px;display:block;margin:auto;transition:0.6s;">
+
 
 
 
@@ -178,14 +179,18 @@ function openCake() {
   openBox("cake");
 }
 
+<script>
 function cutCake() {
   var cake = document.getElementById("cakeImg");
-  cake.style.display = "block";
-  cake.style.transform = "scale(0.9) rotate(-5deg)";
-  cake.style.transition = "0.5s";
+  var msg = document.getElementById("cakeMsg");
 
-  document.getElementById("cakeMsg").style.display = "block";
+  cake.style.transform = "scale(0.8) rotate(-10deg)";
+  cake.style.opacity = "0.2";
+
+  msg.style.display = "block";
 }
+</script>
+
 
 
 
