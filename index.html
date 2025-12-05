@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Ponnus Birthday Surprise 💖</title>
   <style>
     body {
@@ -12,45 +13,31 @@
       overflow-x: hidden;
     }
 
-    h1 { margin-top: 30px; }
+    h1 { margin-top: 20px; }
 
     .btn {
+      padding: 12px 25px;
       margin: 10px;
-      padding: 12px 30px;
-      font-size: 16px;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       background: white;
       color: #ff4b7d;
+      font-size: 16px;
       cursor: pointer;
-      font-weight: bold;
     }
 
-    .box {
+    .section {
       display: none;
-      background: white;
-      color: #ff4b7d;
-      margin: 20px auto;
       padding: 20px;
-      border-radius: 20px;
-      width: 85%;
-      max-width: 400px;
-    }
-
-    /* Gallery */
-    .gallery img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      margin: 5px;
     }
 
     /* Popup */
     .popup {
       display: none;
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
+      top: 0; left: 0;
+      height: 100vh; width: 100%;
+      background: rgba(0,0,0,0.6);
       justify-content: center;
       align-items: center;
     }
@@ -59,133 +46,120 @@
       background: white;
       color: #ff4b7d;
       padding: 25px;
-      border-radius: 20px;
-      max-width: 350px;
-      animation: pop 0.4s ease;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 400px;
     }
 
-    @keyframes pop {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
+    /* Gallery */
+    .gallery img {
+      width: 90%;
+      max-width: 280px;
+      margin: 10px;
+      border-radius: 15px;
+    }
+
+    /* Quotes */
+    .quote {
+      font-size: 20px;
+      margin-top: 20px;
+      animation: fade 2s infinite;
+    }
+
+    @keyframes fade {
+      0% {opacity: 0;}
+      50% {opacity: 1;}
+      100% {opacity: 0;}
     }
 
     /* Fireworks */
     .firework {
       position: fixed;
-      width: 6px;
-      height: 6px;
-      background: white;
+      width: 10px;
+      height: 10px;
+      background: yellow;
       border-radius: 50%;
-      animation: explode 1s infinite;
+      animation: boom 1s infinite;
     }
 
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(15); opacity: 0; }
+    @keyframes boom {
+      from {transform: scale(0);}
+      to {transform: scale(3); opacity: 0;}
     }
   </style>
 </head>
 <body>
 
-  <h1>🎂 Happy Birthday My Love Ponnus 💖</h1>
-  <p>From Jinu 🥰 | December 14</p>
+<h1>🎂 Happy Birthday My Ponnus 💖</h1>
 
-  <!-- COUNTDOWN -->
-  <h2 id="countdown"></h2>
+<button class="btn" onclick="showSection('letter')">💌 Love Letter</button>
+<button class="btn" onclick="showSection('gallery')">🖼 Photo Gallery</button>
+<button class="btn" onclick="showSection('countdown')">⏳ Countdown</button>
+<button class="btn" onclick="openPopup()">🎁 Surprise</button>
+<button class="btn" onclick="startFireworks()">🎆 Fireworks</button>
+<button class="btn" onclick="showSection('quotes')">💬 Love Quotes</button>
 
-  <button class="btn" onclick="openLove()">💌 Love Letter</button>
-  <button class="btn" onclick="openGallery()">🖼️ Photo Gallery</button>
-  <button class="btn" onclick="openPopup()">🎁 Surprise</button>
-  <button class="btn" onclick="playMusic()">🎵 Music</button>
+<div id="letter" class="section">
+  <h2>💖 My Love Letter</h2>
+  <p>
+    My dear Ponnus, you are my heartbeat, my smile, my everything.
+    Life became beautiful after you came.  
+    Happy Birthday my love ❤️  
+    Forever yours,  
+    <b>– Jinu</b>
+  </p>
+</div>
 
-  <!-- LOVE LETTER -->
-  <div class="box" id="love">
-    <h3>My Love Letter 💖</h3>
-    <p>
-      My dear Ponnus,<br><br>
-      You are my happiness, my world, my everything.<br>
-      I promise to love you forever and always.<br><br>
-      – Yours only, Jinu 💕
-    </p>
+<div id="gallery" class="section gallery">
+  <h2>🖼 Our Memories</h2>
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+</div>
+
+<div id="countdown" class="section">
+  <h2>⏳ Countdown to Your Birthday</h2>
+  <h3 id="timer"></h3>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>🎁 Surprise for You</h2>
+    <p>You are the most precious gift in my life Ponnus 💕</p>
+    <button class="btn" onclick="closePopup()">Close</button>
   </div>
+</div>
 
-  <!-- GALLERY -->
-  <div class="box gallery" id="gallery">
-    <h3>Our Memories 🥰</h3>
-    <img src="https://via.placeholder.com/80">
-    <img src="https://via.placeholder.com/80">
-    <img src="https://via.placeholder.com/80">
-  </div>
+<div id="quotes" class="section">
+  <h2>💬 Romantic Quotes</h2>
+  <div class="quote" id="quoteText"></div>
+</div>
 
-  <!-- POPUP -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h3>🎁 My Surprise 💖</h3>
-      <p>
-        Your real gift is waiting with me in real life 😘<br>
-        This is just the beginning of our forever 💍
-      </p>
-      <button class="btn" onclick="closePopup()">Close</button>
-    </div>
-  </div>
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- MUSIC -->
-  <audio id="song" src="music.mp3"></audio>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.style.display = "none");
+    document.getElementById(id).style.display = "block";
+  }
 
-  <script>
-    function openLove() {
-      hideAll();
-      document.getElementById("love").style.display = "block";
-    }
+  function openPopup() {
+    document.getElementById("popup").style.display = "flex";
+  }
 
-    function openGallery() {
-      hideAll();
-      document.getElementById("gallery").style.display = "block";
-    }
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
 
-    function openPopup() {
-      document.getElementById("popup").style.display = "flex";
-    }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-
-    function hideAll() {
-      document.getElementById("love").style.display = "none";
-      document.getElementById("gallery").style.display = "none";
-    }
-
-    function playMusic() {
-      document.getElementById("song").play();
-      alert("Music playing for my Ponnus 💖");
-    }
-
-    /* COUNTDOWN */
-    const targetDate = new Date("December 14, 2025 00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("countdown").innerHTML =
-        `⏳ ${d} Days ${h}h ${m}m ${s}s to go`;
-    }, 1000);
-
-    /* FIREWORKS */
-    setInterval(() => {
-      const fw = document.createElement("div");
-      fw.className = "firework";
-      fw.style.left = Math.random() * window.innerWidth + "px";
-      fw.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(fw);
-      setTimeout(() => fw.remove(), 1000);
-    }, 300);
-  </script>
-
-</body>
-</html>
+  // Countdown (Dec 14, 2025)
+  const target = new Date("December 14, 2025").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = target - now;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    document.getElem
