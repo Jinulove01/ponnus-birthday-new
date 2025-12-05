@@ -51,8 +51,9 @@ body{
 #message{
   display:none;
   font-size:22px;
-  line-height:1.6;
+  line-height:1.7;
   max-width:90%;
+  white-space: pre-line;
   animation: fadeIn 2s forwards;
 }
 
@@ -90,19 +91,20 @@ body{
 
 <script>
 const msgText = `Ponnus… 💖
-From the first moment I saw you,  
-my world slowly changed.  
-Your smile became my happiness,  
-your voice became my peace.  
 
-On this special day,  
-I just want you to know one thing…  
+From the first moment I saw you,
+my world slowly changed.
+Your smile became my happiness,
+your voice became my peace.
 
-You are my today,  
-my tomorrow,  
-and my forever ♾️  
+On this special day,
+I just want you to know one thing…
 
-Happy Birthday My Love ❤️  
+You are my today,
+my tomorrow,
+and my forever ♾️
+
+Happy Birthday My Love ❤️
 — Yours always, Jinu`;
 
 let index = 0;
@@ -123,24 +125,29 @@ for(let i=0;i<80;i++){
 function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
-  bg.play();
+
+  bg.currentTime = 0;
+  bg.play().catch(()=>{}); // ✅ mobile safe
+
   typeWriter();
   startFireworks();
 }
 
-/* TYPE WRITER */
+/* TYPE WRITER (SAFE VERSION) */
 function typeWriter(){
   if(index < msgText.length){
-    msgDiv.innerHTML += msgText.charAt(index);
+    msgDiv.textContent += msgText.charAt(index); // ✅ FIXED
     index++;
     setTimeout(typeWriter, 50);
   }
 }
 
-/* REAL FIREWORKS */
+/* CONTROLLED FIREWORKS */
 function startFireworks(){
-  setInterval(()=>{
-    for(let i=0;i<10;i++){
+  let count = 0;
+
+  const fireInt = setInterval(()=>{
+    for(let i=0;i<8;i++){
       const f = document.createElement("div");
       f.className="firework";
       f.style.left=Math.random()*100+"vw";
@@ -149,6 +156,9 @@ function startFireworks(){
       document.body.appendChild(f);
       setTimeout(()=>f.remove(),1500);
     }
+
+    count++;
+    if(count > 20){ clearInterval(fireInt); } // ✅ stops cleanly
   },600);
 }
 </script>
