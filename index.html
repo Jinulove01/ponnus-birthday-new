@@ -153,22 +153,28 @@ function toggleCountdown(){
 }
 
 /* ---------- Fireworks (little bursts) ---------- */
+let fireworkInterval = null;
+
 function startFireworks(){
-  for(let i=0;i<30;i++){
-    const f = document.createElement("div");
-    f.className = "firework";
-    f.style.left = Math.random()*100 + "vw";
-    f.style.top = Math.random()*100 + "vh";
-    f.style.background = `hsl(${Math.random()*360},100%,60%)`;
-    document.body.appendChild(f);
+  if(fireworkInterval) return; // prevent multiple starts
 
-    setTimeout(()=> {
-      f.style.transform = "scale(12)";
-      f.style.opacity = "0";
-    }, 50);
+  fireworkInterval = setInterval(()=>{
+    for(let i=0;i<6;i++){
+      const f = document.createElement("div");
+      f.className = "firework";
+      f.style.left = Math.random()*100 + "vw";
+      f.style.top = Math.random()*100 + "vh";
+      f.style.background = `hsl(${Math.random()*360},100%,60%)`;
+      document.body.appendChild(f);
 
-    setTimeout(()=> f.remove(), 1300);
-  }
+      setTimeout(()=>{
+        f.style.transform = "scale(15)";
+        f.style.opacity = "0";
+      }, 50);
+
+      setTimeout(()=> f.remove(), 1500);
+    }
+  }, 400); // keeps repeating every 0.4 sec
 }
 
 
