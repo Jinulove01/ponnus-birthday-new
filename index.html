@@ -70,4 +70,94 @@ h1 {
 <h1>🎂 Happy Birthday My Ponnus 💖</h1>
 
 <div class="buttons">
-<button oncli
+<button onclick="openPopup()">💌 Love Letter</button>
+<button onclick="alert('Add Your Photos Later')">🖼️ Gallery</button>
+<button onclick="showCountdown()">⏳ Countdown</button>
+<button onclick="alert('Surprise for you jaan 💝')">🎁 Surprise</button>
+<button onclick="startFireworks()">🎆 Fireworks</button>
+<button onclick="showQuote()">💬 Quotes</button>
+<button onclick="cutCake()">🎂 Cut Cake</button>
+<button onclick="playMusic()">▶ Music</button>
+</div>
+
+<h2 id="timer"></h2>
+<h3 id="quoteText"></h3>
+
+<img src="cake.png" id="cake">
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h2>My Love Letter 💖</h2>
+    <p>
+      Happy Birthday my jaan Ponnus 💕  
+      You are my heart, my happiness, my everything.  
+      I promise to love you forever ❤️  
+      — Jinu
+    </p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openPopup(){
+ document.getElementById("popup").style.display="block";
+}
+
+function closePopup(){
+ document.getElementById("popup").style.display="none";
+}
+
+function playMusic(){
+ document.getElementById("bgMusic").play();
+}
+
+function showCountdown(){
+ var target = new Date("Dec 14, 2025").getTime();
+ setInterval(function(){
+   var now = new Date().getTime();
+   var diff = target - now;
+
+   var d = Math.floor(diff / (1000*60*60*24));
+   var h = Math.floor((diff / (1000*60*60)) % 24);
+   var m = Math.floor((diff / (1000*60)) % 60);
+   var s = Math.floor((diff / 1000) % 60);
+
+   document.getElementById("timer").innerHTML =
+   "⏳ " + d + " Days " + h + "h " + m + "m " + s + "s";
+ },1000);
+}
+
+var quotes = [
+ "I love you more than words 💖",
+ "You are my forever ❤️",
+ "My heart beats only for you 💕"
+];
+let qi = 0;
+function showQuote(){
+ document.getElementById("quoteText").innerText = quotes[qi];
+ qi = (qi+1) % quotes.length;
+}
+
+function startFireworks(){
+ for(let i=0;i<20;i++){
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"vw";
+  f.style.top=Math.random()*100+"vh";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+ }
+}
+
+function cutCake(){
+ document.getElementById("cake").style.transform="scale(0.85) rotate(-5deg)";
+ alert("🎂 Cake Cut Successfully for Ponnus 💖");
+}
+</script>
+
+</body>
+</html>
