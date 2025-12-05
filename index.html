@@ -18,13 +18,13 @@
     }
 
     button {
-      padding: 12px 25px;
+      padding: 12px 22px;
       margin: 8px;
       border: none;
       border-radius: 25px;
       background: white;
       color: #ff4b7d;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
     }
 
@@ -50,11 +50,40 @@
     #popupContent {
       background: white;
       color: #ff4b7d;
-      margin: 150px auto;
+      margin: 120px auto;
       padding: 20px;
       width: 80%;
       max-width: 350px;
       border-radius: 15px;
+    }
+
+    /* Gallery */
+    img {
+      width: 90%;
+      max-width: 280px;
+      border-radius: 15px;
+      margin: 10px 0;
+    }
+
+    /* Fireworks */
+    .firework {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: yellow;
+      border-radius: 50%;
+      animation: boom 1s infinite;
+    }
+
+    @keyframes boom {
+      from {transform: scale(0);}
+      to {transform: scale(3); opacity: 0;}
+    }
+
+    /* Quotes */
+    .quote {
+      font-size: 20px;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -67,41 +96,58 @@
 <button onclick="openBox('gallery')">🖼 Photo Gallery</button>
 <button onclick="openBox('countdown')">⏳ Countdown</button>
 <button onclick="openPopup()">🎁 Surprise</button>
+<button onclick="startFireworks()">🎆 Fireworks</button>
+<button onclick="openBox('quotes')">💬 Quotes</button>
 <button onclick="playMusic()">🎵 Play Music</button>
 
 <div id="letter" class="box">
   <h2>💖 My Love Letter</h2>
   <p>
-    My dear Ponnus, you are my world, my love, my forever 💕  
-    Happy Birthday my life ❤️  
-    – Jinu
+    My dear Ponnus,  
+    You are my happiness, my heartbeat, my everything.  
+    My life became beautiful because of you.  
+    Happy Birthday my love 💕  
+    Forever yours,  
+    <b>– Jinu</b>
   </p>
 </div>
 
 <div id="gallery" class="box">
-  <h2>🖼 Our Photos</h2>
-  <p>(Add your photos later here)</p>
+  <h2>🖼 Our Memories</h2>
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+  <p>(You can upload your photos later)</p>
 </div>
 
 <div id="countdown" class="box">
-  <h2>⏳ Countdown to Dec 14</h2>
+  <h2>⏳ Countdown to Her Birthday</h2>
   <h3 id="timer">Loading...</h3>
+</div>
+
+<div class="box" id="quotes">
+  <h2>💬 Romantic Quotes</h2>
+  <div class="quote" id="quoteText"></div>
 </div>
 
 <div id="popup">
   <div id="popupContent">
     <h2>🎁 Surprise</h2>
-    <p>You are the best thing in my life Ponnus 💖</p>
+    <p>You are the most precious gift in my life Ponnus 💖</p>
     <button onclick="closePopup()">Close</button>
   </div>
 </div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   function openBox(id) {
     document.getElementById("letter").style.display = "none";
     document.getElementById("gallery").style.display = "none";
     document.getElementById("countdown").style.display = "none";
-
+    document.getElementById("quotes").style.display = "none";
     document.getElementById(id).style.display = "block";
   }
 
@@ -113,9 +159,13 @@
     document.getElementById("popup").style.display = "none";
   }
 
+  function playMusic() {
+    var music = document.getElementById("bgMusic");
+    music.play();
+  }
+
   // ✅ Countdown (Dec 14, 2025)
   var targetDate = new Date("December 14, 2025").getTime();
-
   setInterval(function () {
     var now = new Date().getTime();
     var diff = targetDate - now;
@@ -128,6 +178,32 @@
     document.getElementById("timer").innerHTML =
       days + "d " + hours + "h " + minutes + "m " + seconds + "s";
   }, 1000);
+
+  // Quotes
+  var quotes = [
+    "I love you more than words can say 💖",
+    "You are my today and all my tomorrows ❤️",
+    "With you, everything feels perfect 💕"
+  ];
+  var i = 0;
+  setInterval(function () {
+    document.getElementById("quoteText").innerText = quotes[i];
+    i = (i + 1) % quotes.length;
+  }, 2000);
+
+  // Fireworks
+  function startFireworks() {
+    for (var i = 0; i < 15; i++) {
+      var f = document.createElement("div");
+      f.className = "firework";
+      f.style.left = Math.random() * 100 + "vw";
+      f.style.top = Math.random() * 100 + "vh";
+      document.body.appendChild(f);
+      setTimeout(function () {
+        f.remove();
+      }, 1000);
+    }
+  }
 </script>
 
 </body>
