@@ -48,7 +48,7 @@ body{
   100%{opacity:0.4}
 }
 
-/* 💬 TEXT MESSAGE (ALWAYS ABOVE IMAGES) */
+/* 💬 TEXT MESSAGE */
 #message{
   display:none;
   font-size:22px;
@@ -66,7 +66,7 @@ body{
   to{opacity:1}
 }
 
-/* ✅ IMAGE SLIDER (BEHIND TEXT) */
+/* ✅ IMAGE SLIDER (STARTS HIDDEN) */
 #slider{
   display:none;
   position:fixed;
@@ -81,10 +81,9 @@ body{
   border-radius:16px;
   overflow:hidden;
   box-shadow:0 20px 40px rgba(0,0,0,0.5);
-  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:999;   /* ✅ BELOW TEXT */
+  z-index:999;
 }
 
 #slider img{
@@ -177,7 +176,7 @@ function startSurprise(){
   document.getElementById("startBtn").style.display="none";
   msgDiv.style.display="block";
   bg.play();
-  typeWriter();
+  typeWriter();        // ✅ text starts first
   startFireworks();
 }
 
@@ -188,7 +187,8 @@ function typeWriter(){
     charIndex++;
     setTimeout(typeWriter, 45);
   } else {
-    startSlider();
+    // ✅ ✅ ONLY AFTER FULL TEXT FINISHES
+    setTimeout(startSlider, 1200);  
   }
 }
 
@@ -213,13 +213,12 @@ const slides=slider.querySelectorAll("img");
 let slideIndex=0;
 
 function startSlider(){
-  slider.style.display="flex";
-  slides[0].classList.add("active");
+  slider.style.display="flex";   // ✅ appears ONLY here
 
   setInterval(()=>{
-    slides[slideIndex].classList.remove("active");
-    slideIndex=(slideIndex+1)%slides.length;
+    slides.forEach(img => img.classList.remove("active"));
     slides[slideIndex].classList.add("active");
+    slideIndex = (slideIndex + 1) % slides.length;
   },3000);
 }
 </script>
