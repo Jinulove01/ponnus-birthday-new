@@ -98,7 +98,7 @@
 <button onclick="openPopup()">🎁 Surprise</button>
 <button onclick="startFireworks()">🎆 Fireworks</button>
 <button onclick="openBox('quotes')">💬 Quotes</button>
-<button onclick="playMusic()">🎵 Play Music</button>
+
 
 <div id="letter" class="box">
   <h2>💖 My Love Letter</h2>
@@ -138,9 +138,11 @@
   </div>
 </div>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" controls>
   <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
+
 
 <script>
   function openBox(id) {
@@ -159,10 +161,8 @@
     document.getElementById("popup").style.display = "none";
   }
 
-  function playMusic() {
-    var music = document.getElementById("bgMusic");
-    music.play();
-  }
+  
+  
 
   // ✅ Countdown (Dec 14, 2025)
   var targetDate = new Date("December 14, 2025").getTime();
